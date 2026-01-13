@@ -21,7 +21,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 {
                     while (true)
                     {
-                        //Menyn är anropas från en annan fil för bättre läsbarhet
+                        //Startar menyn
                         Menu.StartMenu();
                     }
                 }
