@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GIK299_Projektuppgift_Grupp32;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -51,23 +52,23 @@ internal class Menu
                     switch (Choice)
                     {
                         case 1:
-                            Booking.TodaysBookings();
+                            BookingMenu.TodaysBookings();
                             break;
 
                         case 2:
-                            Booking.AddBooking();
+                            BookingMenu.AddBooking();
                             break;
 
                         case 3:
-                            Booking.SearchBookings();
+                            BookingMenu.SearchBookings();
                             break;
 
                         case 4:
-                            Booking.RemoveBooking();
+                            BookingMenu.RemoveBooking();
                             break;
 
                         case 5:
-                            Booking.AllBookings();
+                            BookingMenu.AllBookings();
                             break;
 
                         case 0:

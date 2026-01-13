@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GIK299_Projektuppgift_Grupp32
 {
-    internal class Booking
+    internal class BookingMenu
     {
         internal static void TodaysBookings()
         {
