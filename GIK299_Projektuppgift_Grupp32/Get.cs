@@ -14,7 +14,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 Console.WriteLine("Skriv datum på kundens bokning (åååå-MM-dd HH)");
                 if (DateTime.TryParse(Console.ReadLine(), out DateTime TimeWhenBooked))
                 {
-                    foreach (var t in Start.BookedList)
+                    foreach (var t in Data.BookedList)
                     {
                         if (t.PlanedTime == TimeWhenBooked)
                         {
