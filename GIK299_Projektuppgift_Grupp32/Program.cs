@@ -94,7 +94,49 @@ namespace GIK299_Projektuppgift_Grupp32
     {
         internal static void TodaysBookings()
         {
-            DateTime today = DateTime.Now.Date;
+            // Idag
+            var today = DateTime.Now;
+
+            // Lägg till några bokningar i Start.BookedList
+            Start.BookedList.AddRange(new List<Booking>
+                {
+                new Booking
+                {
+                    Service = Services.Däckbyte,
+                    PlanedTime = new DateTime(today.Year, today.Month, today.Day, 10, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Anna Svensson",
+                        Registration = "GIK299",
+                        PhoneNumber = "070-1234567"
+                    }
+                },
+                new Booking
+                {
+                    Service = Services.Balansering,
+                    PlanedTime = new DateTime(today.Year, today.Month, today.Day, 14, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Erik Johansson",
+                        Registration = "XYZ123",
+                        PhoneNumber = "073-9876543"
+                    }
+                },
+                // Bokning för imorgon (ska inte visas idag)
+                new Booking
+                {
+                    Service = Services.Däckhotell,
+                    PlanedTime = today.AddDays(1).AddHours(9),
+                    Costumer = new Costumers
+                    {
+                        Name = "Lisa Karlsson",
+                        Registration = "ABC456",
+                        PhoneNumber = "072-5556667"
+                    }
+                }
+                });
+
+            
             bool found = false;
 
             foreach (var booking in Start.BookedList)
