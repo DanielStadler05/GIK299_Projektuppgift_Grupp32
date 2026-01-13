@@ -45,6 +45,7 @@ internal class Menu
             Console.WriteLine("4. Ta bort bokning vid tid");
             Console.WriteLine("5. Visa alla bokningar");
             Console.WriteLine("0. Avsluta Programmet");
+            Console.Write("Type the number: ");
 
             if (int.TryParse(Console.ReadLine(), out int Choice))
             {
