@@ -8,13 +8,18 @@ namespace GIK299_Projektuppgift_Grupp32
         public Costumers Costumer { get; set; }
         public Services Service { get; set; }
 
+        public Booking(DateTime planedTime, Services service, Costumers costumer)
+        {
+            PlanedTime = planedTime;
+            Service = service;
+            Costumer = costumer;
+        }
         public override string ToString()
         {
-            return                
+            return
                 $"Tid:{PlanedTime: yyyy/MM/dd HH:mm} " +
                 $"Tjänst: {Service} " +
                 $"Kund: {Costumer} ";
         }
     }
 }
-

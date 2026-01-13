@@ -8,6 +8,55 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void Main()
         {
+            // Bokningar i november 2025
+            Start.BookedList.AddRange(new List<Booking>
+            {
+                new Booking(
+                    new DateTime(2025, 11, 26, 10, 0, 0),
+                    Services.Däckbyte,
+                    new Costumers("Anna Svensson", "GIK299", "070-1234567")
+                ),
+                new Booking(
+                    new DateTime(2025, 11, 26, 14, 0, 0),
+                    Services.Balansering,
+                    new Costumers("Erik Johansson", "XYZ123", "073-9876543")
+                ),
+                new Booking(
+                    new DateTime(2025, 11, 28, 9, 0, 0),
+                    Services.Däckhotell,
+                    new Costumers("Lisa Karlsson", "ABC456", "072-5556667")
+                ),
+                new Booking(
+                    new DateTime(2025, 11, 29, 12, 0, 0),
+                    Services.Hjulintställning,
+                    new Costumers("Jonas Lind", "DEF789", "076-8889990")
+                )
+            });
+
+                // Bokningar för "idag"
+                var today = DateTime.Now.Date;
+
+                Start.BookedList.AddRange(new List<Booking>
+            {
+                new Booking(
+                    new DateTime(today.Year, today.Month, today.Day, 10, 0, 0),
+                    Services.Däckbyte,
+                    new Costumers("Mikael Andersson", "MKA001", "070-1112233")
+                ),
+                new Booking(
+                    new DateTime(today.Year, today.Month, today.Day, 14, 0, 0),
+                    Services.Balansering,
+                    new Costumers("Sofia Berg", "SOB002", "073-4445566")
+                ),
+                // Bokning för imorgon (ska inte visas idag)
+                new Booking(
+                    today.AddDays(1).AddHours(9),
+                    Services.Däckhotell,
+                    new Costumers("Peter Nilsson", "PEN003", "072-7778899")
+                )
+            });
+
+
             //Logga in på adminpanelen
             while (true)
             {
@@ -18,12 +67,9 @@ namespace GIK299_Projektuppgift_Grupp32
                 //Om lösenordet är rätt starta programmet
                 if (AdminPassword == "admin123")
                 {
-                    while (true)
-                    {
-                        Console.Clear();
-                        //Startar menyn
-                        Menu.StartMenu();
-                    }
+                    Console.Clear();
+                    //Startar menyn
+                    Menu.StartMenu();
                 }
                 else
                 {
@@ -97,46 +143,6 @@ namespace GIK299_Projektuppgift_Grupp32
         {
             
             var today = DateTime.Now.Date;
-
-            //Lägg till några exempel bokningar i BookedList
-            Start.BookedList.AddRange(new List<Booking>
-    {
-        new Booking
-        {
-            Service = Services.Däckbyte,
-            PlanedTime = new DateTime(today.Year, today.Month, today.Day, 10, 0, 0),
-            Costumer = new Costumers
-            {
-                Name = "Anna Svensson",
-                Registration = "GIK299",
-                PhoneNumber = "070-1234567"
-            }
-        },
-        new Booking
-        {
-            Service = Services.Balansering,
-            PlanedTime = new DateTime(today.Year, today.Month, today.Day, 14, 0, 0),
-            Costumer = new Costumers
-            {
-                Name = "Erik Johansson",
-                Registration = "XYZ123",
-                PhoneNumber = "073-9876543"
-            }
-        },
-        //Bokning för imorgon (ska inte visas idag)
-        new Booking
-        {
-            Service = Services.Däckhotell,
-            PlanedTime = today.AddDays(1).AddHours(9),
-            Costumer = new Costumers
-            {
-                Name = "Lisa Karlsson",
-                Registration = "ABC456",
-                PhoneNumber = "072-5556667"
-            }
-        }
-    });
-
             bool found = false;
 
             foreach (var booking in Start.BookedList)
@@ -161,8 +167,66 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void AddBooking()
         {
+            Console.WriteLine("Lägg till en ny bokning");
 
+            // --- Datum och tid ---
+            DateTime planedTime;
+            while (true)
+            {
+                Console.Write("Ange datum och tid (ÅÅÅÅ-MM-DD HH:mm): ");
+                if (DateTime.TryParse(Console.ReadLine(), out planedTime))
+                {
+                    break;
+                }
+                Console.WriteLine("Fel format, försök igen!");
+            }
+
+            // --- Välj tjänst ---
+            Console.WriteLine("Välj tjänst:");
+            var services = Enum.GetValues(typeof(Services));
+            for (int i = 0; i < services.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {services.GetValue(i)}");
+            }
+
+            Services service;
+            while (true)
+            {
+                Console.Write("Ange nummer för tjänst: ");
+                if (int.TryParse(Console.ReadLine(), out int serviceChoice) &&
+                    serviceChoice >= 1 && serviceChoice <= services.Length)
+                {
+                    service = (Services)services.GetValue(serviceChoice - 1);
+                    break;
+                }
+                Console.WriteLine("Fel val, försök igen!");
+            }
+
+            // --- Kundinformation ---
+            Console.Write("Ange kundens namn: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Ange registreringsnummer: ");
+            string registration = Console.ReadLine();
+
+            Console.Write("Ange telefonnummer: ");
+            string phone = Console.ReadLine();
+
+            // Skapa Costumer med konstruktorn
+            var costumer = new Costumers(name, registration, phone);
+
+            // Skapa Booking med konstruktorn och lägg till listan
+            var booking = new Booking(planedTime, service, costumer);
+            Start.BookedList.Add(booking);
+
+            Console.WriteLine("\nBokningen är tillagd!");
+            Console.WriteLine(booking);
+
+            Console.WriteLine("\nTryck på enter för att återgå till menyn...");
+            Console.ReadLine();
+            Console.Clear();
         }
+
 
         internal static void SearchBookings()
         {
@@ -239,55 +303,6 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void RemoveBooking()
         {
-            //Lägg till några exempel bokningar i BookedList
-            Start.BookedList.AddRange(new List<Booking>
-            {
-                new Booking
-                {
-                    Service = Services.Däckbyte,
-                    PlanedTime = new DateTime(2025, 11, 26, 10, 0, 0),
-                    Costumer = new Costumers
-                    {
-                        Name = "Anna Svensson",
-                        Registration = "GIK299",
-                        PhoneNumber = "070-1234567"
-                    }
-                },
-                new Booking
-                {
-                    Service = Services.Balansering,
-                    PlanedTime = new DateTime(2025, 11, 26, 14, 0, 0),
-                    Costumer = new Costumers
-                    {
-                        Name = "Erik Johansson",
-                        Registration = "XYZ123",
-                        PhoneNumber = "073-9876543"
-                    }
-                },
-                new Booking
-                {
-                    Service = Services.Däckhotell,
-                    PlanedTime = new DateTime(2025, 11, 28, 9, 0, 0),
-                    Costumer = new Costumers
-                    {
-                        Name = "Lisa Karlsson",
-                        Registration = "ABC456",
-                        PhoneNumber = "072-5556667"
-                    }
-                },
-                new Booking
-                {
-                    Service = Services.Hjulintställning,
-                    PlanedTime = new DateTime(2025, 11, 29, 12, 0, 0),
-                    Costumer = new Costumers
-                    {
-                        Name = "Jonas Lind",
-                        Registration = "DEF789",
-                        PhoneNumber = "076-8889990"
-                    }
-                }
-            });
-
             if (Start.BookedList.Count == 0)
             {
                 Console.WriteLine("Inga bokningar finns just nu.");
@@ -330,55 +345,6 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void AllBookings()
         {
-            //Lägg till några exempel bokningar i BookedList
-            Start.BookedList.AddRange(new List<Booking>
-            {
-                new Booking
-                {
-                    Service = Services.Däckbyte,
-                    PlanedTime = new DateTime(2025, 11, 26, 10, 0, 0),
-                    Costumer = new Costumers
-                    {
-                        Name = "Anna Svensson",
-                        Registration = "GIK299",
-                        PhoneNumber = "070-1234567"
-                    }
-                },
-                new Booking
-                {
-                    Service = Services.Balansering,
-                    PlanedTime = new DateTime(2025, 11, 26, 14, 0, 0),
-                    Costumer = new Costumers
-                    {
-                        Name = "Erik Johansson",
-                        Registration = "XYZ123",
-                        PhoneNumber = "073-9876543"
-                    }
-                },
-                new Booking
-                {
-                    Service = Services.Däckhotell,
-                    PlanedTime = new DateTime(2025, 11, 28, 9, 0, 0),
-                    Costumer = new Costumers
-                    {
-                        Name = "Lisa Karlsson",
-                        Registration = "ABC456",
-                        PhoneNumber = "072-5556667"
-                    }
-                },
-                new Booking
-                {
-                    Service = Services.Hjulintställning,
-                    PlanedTime = new DateTime(2025, 11, 29, 12, 0, 0),
-                    Costumer = new Costumers
-                    {
-                        Name = "Jonas Lind",
-                        Registration = "DEF789",
-                        PhoneNumber = "076-8889990"
-                    }
-                }
-            });
-
             if (Start.BookedList.Count == 0)
             {
                 Console.WriteLine("Inga bokningar finns just nu.");
