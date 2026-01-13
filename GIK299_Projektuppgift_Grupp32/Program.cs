@@ -101,7 +101,14 @@ namespace GIK299_Projektuppgift_Grupp32
                 {
                     Console.WriteLine(booking);
                 }
+                else
+                {
+                    Console.WriteLine("Inga bokningar idag");
+                }
             }
+            Console.WriteLine("Tryck på enter för att återgå till menyn...");
+            Console.ReadLine();
+            Console.Clear();
         }
 
         internal static void AddBooking()
