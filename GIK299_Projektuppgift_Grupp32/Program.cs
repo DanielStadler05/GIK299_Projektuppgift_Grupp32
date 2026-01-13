@@ -94,19 +94,24 @@ namespace GIK299_Projektuppgift_Grupp32
     {
         internal static void TodaysBookings()
         {
-            DateTime dateTime = DateTime.Now;
+            DateTime today = DateTime.Now.Date;
+            bool found = false;
+
             foreach (var booking in Start.BookedList)
             {
-                if (booking.PlanedTime.Date == dateTime.Date)
+                if (booking.PlanedTime.Date == today)
                 {
                     Console.WriteLine(booking);
-                }
-                else
-                {
-                    Console.WriteLine("Inga bokningar idag");
+                    found = true;
                 }
             }
-            Console.WriteLine("Tryck på enter för att återgå till menyn...");
+
+            if (!found)
+            {
+                Console.WriteLine("Inga bokningar idag");
+            }
+
+            Console.WriteLine("\nTryck på enter för att återgå till menyn...");
             Console.ReadLine();
             Console.Clear();
         }
