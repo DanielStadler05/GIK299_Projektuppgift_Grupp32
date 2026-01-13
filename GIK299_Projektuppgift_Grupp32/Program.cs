@@ -149,7 +149,7 @@ namespace GIK299_Projektuppgift_Grupp32
     new Booking
     {
         Service = Services.Hjulintställning,
-        PlanedTime = new DateTime(2025, 11, 29, 12, 30, 0),
+        PlanedTime = new DateTime(2025, 11, 29, 12, 0, 0),
         Costumer = new Costumers
         {
             Name = "Jonas Lind",
