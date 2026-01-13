@@ -5,6 +5,7 @@ namespace GIK299_Projektuppgift_Grupp32
     public class Start
     {
         internal static List<Booking> BookedList = new List<Booking>();
+
         internal static void Main()
         {
             //Logga in på adminpanelen
@@ -43,7 +44,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 Console.WriteLine("1. Visa dagens bokningar");
                 Console.WriteLine("2. Lägg till en ny bokning");
                 Console.WriteLine("3. Sök lediga bokningar");
-                Console.WriteLine("4. Ta bort bokning vid tid");
+                Console.WriteLine("4. Ta bort bokning via namn");
                 Console.WriteLine("5. Visa alla bokningar");
                 Console.WriteLine("0. Avsluta Programmet");
                 Console.Write("Type the number: ");
@@ -97,7 +98,7 @@ namespace GIK299_Projektuppgift_Grupp32
             
             var today = DateTime.Now.Date;
 
-            //Lägg till några exempel bokningar i Start.BookedList
+            //Lägg till några exempel bokningar i BookedList
             Start.BookedList.AddRange(new List<Booking>
     {
         new Booking
@@ -165,55 +166,6 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void SearchBookings()
         {
-            //Lägg till några exempel bokningar i Start.BookedList
-            Start.BookedList.AddRange(new List<Booking>
-{
-    new Booking
-    {
-        Service = Services.Däckbyte,
-        PlanedTime = new DateTime(2025, 11, 26, 10, 0, 0),
-        Costumer = new Costumers
-        {
-            Name = "Anna Svensson",
-            Registration = "GIK299",
-            PhoneNumber = "070-1234567"
-        }
-    },
-    new Booking
-    {
-        Service = Services.Balansering,
-        PlanedTime = new DateTime(2025, 11, 26, 14, 0, 0),
-        Costumer = new Costumers
-        {
-            Name = "Erik Johansson",
-            Registration = "XYZ123",
-            PhoneNumber = "073-9876543"
-        }
-    },
-    new Booking
-    {
-        Service = Services.Däckhotell,
-        PlanedTime = new DateTime(2025, 11, 28, 9, 0, 0),
-        Costumer = new Costumers
-        {
-            Name = "Lisa Karlsson",
-            Registration = "ABC456",
-            PhoneNumber = "072-5556667"
-        }
-    },
-    new Booking
-    {
-        Service = Services.Hjulintställning,
-        PlanedTime = new DateTime(2025, 11, 29, 12, 0, 0),
-        Costumer = new Costumers
-        {
-            Name = "Jonas Lind",
-            Registration = "DEF789",
-            PhoneNumber = "076-8889990"
-        }
-    }
-});
-
             {
                 Console.WriteLine("Sök tider");
                 DateTime startDate;
@@ -254,6 +206,7 @@ namespace GIK299_Projektuppgift_Grupp32
                     return;
                 }
 
+                //Visa bokningar inom dom angivna datumintervallen
                 for (DateTime date = startDate.Date; date <= endDate.Date; date = date.AddDays(1))
                 {
                     Console.WriteLine($"{date:yyyy-MM-dd} ");
@@ -286,7 +239,68 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void RemoveBooking()
         {
-            Console.WriteLine("Vilken kunds bokning ska tas bort?");
+            //Lägg till några exempel bokningar i BookedList
+            Start.BookedList.AddRange(new List<Booking>
+            {
+                new Booking
+                {
+                    Service = Services.Däckbyte,
+                    PlanedTime = new DateTime(2025, 11, 26, 10, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Anna Svensson",
+                        Registration = "GIK299",
+                        PhoneNumber = "070-1234567"
+                    }
+                },
+                new Booking
+                {
+                    Service = Services.Balansering,
+                    PlanedTime = new DateTime(2025, 11, 26, 14, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Erik Johansson",
+                        Registration = "XYZ123",
+                        PhoneNumber = "073-9876543"
+                    }
+                },
+                new Booking
+                {
+                    Service = Services.Däckhotell,
+                    PlanedTime = new DateTime(2025, 11, 28, 9, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Lisa Karlsson",
+                        Registration = "ABC456",
+                        PhoneNumber = "072-5556667"
+                    }
+                },
+                new Booking
+                {
+                    Service = Services.Hjulintställning,
+                    PlanedTime = new DateTime(2025, 11, 29, 12, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Jonas Lind",
+                        Registration = "DEF789",
+                        PhoneNumber = "076-8889990"
+                    }
+                }
+            });
+
+            if (Start.BookedList.Count == 0)
+            {
+                Console.WriteLine("Inga bokningar finns just nu.");
+                return;
+            }
+
+            Console.WriteLine("Alla bokningar: ");
+            foreach (Booking booking in Start.BookedList)
+            {
+                Console.WriteLine($"{booking}");
+            }
+
+            Console.WriteLine("Vilken kunds bokning ska tas bort? (För och efternamn måste matcha)");
             string namn = Console.ReadLine();
 
             bool found = false;
@@ -306,27 +320,79 @@ namespace GIK299_Projektuppgift_Grupp32
             {
                 Console.WriteLine("Ingen bokning med detta namn hittades.");
             }
+
+            Console.WriteLine("Tryck på enter för att återgå till menyn...");
+            Console.ReadLine();
+            Console.Clear();
         }
         
 
 
         internal static void AllBookings()
         {
+            //Lägg till några exempel bokningar i BookedList
+            Start.BookedList.AddRange(new List<Booking>
+            {
+                new Booking
+                {
+                    Service = Services.Däckbyte,
+                    PlanedTime = new DateTime(2025, 11, 26, 10, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Anna Svensson",
+                        Registration = "GIK299",
+                        PhoneNumber = "070-1234567"
+                    }
+                },
+                new Booking
+                {
+                    Service = Services.Balansering,
+                    PlanedTime = new DateTime(2025, 11, 26, 14, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Erik Johansson",
+                        Registration = "XYZ123",
+                        PhoneNumber = "073-9876543"
+                    }
+                },
+                new Booking
+                {
+                    Service = Services.Däckhotell,
+                    PlanedTime = new DateTime(2025, 11, 28, 9, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Lisa Karlsson",
+                        Registration = "ABC456",
+                        PhoneNumber = "072-5556667"
+                    }
+                },
+                new Booking
+                {
+                    Service = Services.Hjulintställning,
+                    PlanedTime = new DateTime(2025, 11, 29, 12, 0, 0),
+                    Costumer = new Costumers
+                    {
+                        Name = "Jonas Lind",
+                        Registration = "DEF789",
+                        PhoneNumber = "076-8889990"
+                    }
+                }
+            });
+
             if (Start.BookedList.Count == 0)
             {
                 Console.WriteLine("Inga bokningar finns just nu.");
                 return;
             }
 
-            Console.WriteLine("--- Alla bokningar ---");
+            Console.WriteLine("Alla bokningar: ");
             foreach (Booking booking in Start.BookedList)
             {
-                Console.WriteLine(
-                    $"Tid: {booking.PlanedTime:yyyy/MM/dd HH:mm}, " +
-                    $"Tjänst: {booking.Service}, " +
-                    $"Kund: {booking.Costumer}");
+                Console.WriteLine($"{booking}");
             }
-
+            Console.WriteLine("Tryck på enter för att återgå till menyn...");
+            Console.ReadLine();
+            Console.Clear();
         }
     }
 }
