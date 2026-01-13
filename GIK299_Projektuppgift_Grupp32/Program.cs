@@ -1,4 +1,5 @@
-﻿
+﻿using System.Globalization;
+
 namespace GIK299_Projektuppgift_Grupp32
 {
     public class Start
@@ -41,7 +42,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 Console.WriteLine("---Adminpanel---");
                 Console.WriteLine("1. Visa dagens bokningar");
                 Console.WriteLine("2. Lägg till en ny bokning");
-                Console.WriteLine("3. Sök ledinga bokningar");
+                Console.WriteLine("3. Sök lediga bokningar");
                 Console.WriteLine("4. Ta bort bokning vid tid");
                 Console.WriteLine("5. Visa alla bokningar");
                 Console.WriteLine("0. Avsluta Programmet");
@@ -101,7 +102,6 @@ namespace GIK299_Projektuppgift_Grupp32
                     Console.WriteLine(booking);
                 }
             }
-
         }
 
         internal static void AddBooking()
@@ -111,7 +111,122 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void SearchBookings()
         {
+            Start.BookedList.AddRange(new List<Booking>
+{
+    new Booking
+    {
+        Service = Services.Däckbyte,
+        PlanedTime = new DateTime(2025, 11, 26, 10, 0, 0),
+        Costumer = new Costumers
+        {
+            Name = "Anna Svensson",
+            Registration = "GIK299",
+            PhoneNumber = "070-1234567"
+        }
+    },
+    new Booking
+    {
+        Service = Services.Balansering,
+        PlanedTime = new DateTime(2025, 11, 26, 14, 0, 0),
+        Costumer = new Costumers
+        {
+            Name = "Erik Johansson",
+            Registration = "XYZ123",
+            PhoneNumber = "073-9876543"
+        }
+    },
+    new Booking
+    {
+        Service = Services.Däckhotell,
+        PlanedTime = new DateTime(2025, 11, 28, 9, 0, 0),
+        Costumer = new Costumers
+        {
+            Name = "Lisa Karlsson",
+            Registration = "ABC456",
+            PhoneNumber = "072-5556667"
+        }
+    },
+    new Booking
+    {
+        Service = Services.Hjulintställning,
+        PlanedTime = new DateTime(2025, 11, 29, 12, 30, 0),
+        Costumer = new Costumers
+        {
+            Name = "Jonas Lind",
+            Registration = "DEF789",
+            PhoneNumber = "076-8889990"
+        }
+    }
+});
 
+            {
+                Console.WriteLine("Sök tider");
+                DateTime startDate;
+                DateTime endDate;
+
+                // Startdatum
+                while (true)
+                {
+                    Console.Clear();
+                    Console.Write("Ange startdatum för sökning (ÅÅÅÅ-MM-DD): ");
+                    if (DateTime.TryParse(Console.ReadLine(), out startDate))
+                    {
+                        break;
+                    }
+
+                    Console.Clear();
+                    Console.WriteLine("Fel format. Ange datum i formatet ÅÅÅÅ-MM-DD");
+                }
+
+                // Slutdatum         
+                while (true)
+                {                    
+                    Console.Write("Ange slutdatum för sökning (ÅÅÅÅ-MM-DD): ");
+                    if (DateTime.TryParse(Console.ReadLine(), out endDate))
+                    {
+                        break;
+                    }
+
+                    Console.Clear();
+                    Console.WriteLine("Fel format. Ange datum i formatet ÅÅÅÅ-MM-DD");
+                }
+
+                if (startDate > endDate)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Startdatum kan inte vara efter slutdatum. Tryck på enter för att återgå till menyn...");
+                    Console.ReadLine();
+                    return;
+                }
+
+                for (DateTime date = startDate.Date; date <= endDate.Date; date = date.AddDays(1))
+                {
+                    Console.WriteLine($"{date:yyyy-MM-dd} ");
+
+                    bool found = false;
+
+                    //Sök bokningar för just den dagen
+                    foreach (var booking in Start.BookedList)
+                    {
+                        if (booking.PlanedTime.Date == date)
+                        {
+                            Console.WriteLine($"{booking}");
+                            found = true;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        Console.WriteLine("Inga bokningar");
+                    }
+
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine("Tryck på enter för att återgå till menyn...");
+                Console.ReadLine();
+                Console.Clear();
+            }
         }
 
         internal static void RemoveBooking()

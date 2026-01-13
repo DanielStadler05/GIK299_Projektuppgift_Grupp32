@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GIK299_Projektuppgift_Grupp32
+﻿namespace GIK299_Projektuppgift_Grupp32
 {
     public struct Costumers
     {
-        string Name;
-        string Registration;
-        string PhoneNumber;
+        public string Name { get; set; }
+        public string Registration { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name}, Reg.Nr {Registration}, Tel: {PhoneNumber}";
+        }
     }
 }
