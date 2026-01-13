@@ -10,10 +10,9 @@ namespace GIK299_Projektuppgift_Grupp32
 
         public override string ToString()
         {
-            return
-                "*** Bokning Bekräftad! ***\n" +
-                $"Tid: {PlanedTime: yyyy/MM/dd HH:mm} \n" +
-                $"Tjänst: {Service}\n " +
+            return                
+                $"Tid:{PlanedTime: yyyy/MM/dd HH:mm} " +
+                $"Tjänst: {Service} " +
                 $"Kund: {Costumer} ";
         }
     }
