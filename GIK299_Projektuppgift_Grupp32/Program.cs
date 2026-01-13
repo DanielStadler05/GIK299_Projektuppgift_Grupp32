@@ -25,6 +25,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("FEL lösenord");
                 }
             }
@@ -113,5 +114,4 @@ internal class BookingMenu
     {
 
     }
-
 }
