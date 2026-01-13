@@ -1,7 +1,7 @@
 ﻿
 namespace GIK299_Projektuppgift_Grupp32
 {
-    internal class Start
+    public class Start
     {
         internal static List<Booking> BookedList = new List<Booking>();
         internal static void Main()
@@ -31,88 +31,97 @@ namespace GIK299_Projektuppgift_Grupp32
             }
         }
     }
-}
-internal class Menu
-{
-    internal static void StartMenu()
+
+    internal class Menu
     {
-        while (true)
+        internal static void StartMenu()
         {
-            Console.WriteLine("---Adminpanel---");
-            Console.WriteLine("1. Visa dagens bokningar");
-            Console.WriteLine("2. Lägg till en ny bokning");
-            Console.WriteLine("3. Sök ledinga bokningar");
-            Console.WriteLine("4. Ta bort bokning vid tid");
-            Console.WriteLine("5. Visa alla bokningar");
-            Console.WriteLine("0. Avsluta Programmet");
-            Console.Write("Type the number: ");
-
-            if (int.TryParse(Console.ReadLine(), out int Choice))
+            while (true)
             {
-                switch (Choice)
+                Console.WriteLine("---Adminpanel---");
+                Console.WriteLine("1. Visa dagens bokningar");
+                Console.WriteLine("2. Lägg till en ny bokning");
+                Console.WriteLine("3. Sök ledinga bokningar");
+                Console.WriteLine("4. Ta bort bokning vid tid");
+                Console.WriteLine("5. Visa alla bokningar");
+                Console.WriteLine("0. Avsluta Programmet");
+                Console.Write("Type the number: ");
+
+                if (int.TryParse(Console.ReadLine(), out int Choice))
                 {
-                    case 1:
-                        BookingMenu.TodaysBookings();
-                        break;
+                    switch (Choice)
+                    {
+                        case 1:
+                            BookingMenu.TodaysBookings();
+                            break;
 
-                    case 2:
-                        BookingMenu.AddBooking();
-                        break;
+                        case 2:
+                            BookingMenu.AddBooking();
+                            break;
 
-                    case 3:
-                        BookingMenu.SearchBookings();
-                        break;
+                        case 3:
+                            BookingMenu.SearchBookings();
+                            break;
 
-                    case 4:
-                        BookingMenu.RemoveBooking();
-                        break;
+                        case 4:
+                            BookingMenu.RemoveBooking();
+                            break;
 
-                    case 5:
-                        BookingMenu.AllBookings();
-                        break;
+                        case 5:
+                            BookingMenu.AllBookings();
+                            break;
 
-                    case 0:
-                        Environment.Exit(0);
-                        break;
+                        case 0:
+                            Environment.Exit(0);
+                            break;
 
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Fel inmatning endast number mellan 0-5"); //Check if int 6 as a input does run this code
-                        break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Fel inmatning endast number mellan 0-5"); //Check if int 6 as a input does run this code
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Fel inmatning endast number mellan 0-5");
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Fel inmatning endast number mellan 0-5");
+                }
             }
         }
     }
-}
-internal class BookingMenu
-{
-    internal static void TodaysBookings()
+    internal class BookingMenu
     {
+        internal static void TodaysBookings()
+        {
+            DateTime dateTime = DateTime.Now;
+            foreach (var booking in Start.BookedList)
+            {
+                if (booking.PlanedTime.Date == dateTime.Date)
+                {
+                    Console.WriteLine(booking);
+                }
+            }
 
-    }
+        }
 
-    internal static void AddBooking()
-    {
+        internal static void AddBooking()
+        {
 
-    }
+        }
 
-    internal static void SearchBookings()
-    {
+        internal static void SearchBookings()
+        {
 
-    }
+        }
 
-    internal static void RemoveBooking()
-    {
+        internal static void RemoveBooking()
+        {
 
-    }
+        }
 
-    internal static void AllBookings()
-    {
+        internal static void AllBookings()
+        {
 
+        }
     }
 }
