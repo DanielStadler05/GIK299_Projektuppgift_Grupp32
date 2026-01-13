@@ -3,7 +3,7 @@ namespace GIK299_Projektuppgift_Grupp32
 {
     internal class Start
     {
-        internal static List<Booking> Booking = new List<Booking>();
+        internal static List<Booking> BookedList = new List<Booking>();
         internal static void Main()
         {
             //Logga in på adminpanelen
