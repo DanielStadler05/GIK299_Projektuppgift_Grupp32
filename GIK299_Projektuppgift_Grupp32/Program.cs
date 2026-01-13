@@ -202,7 +202,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 Console.WriteLine("Fel val, försök igen!");
             }
 
-            // --- Kundinformation ---
+            //Skriv in kundens namn, registreringsnummer och telefonnummer
             Console.Write("Ange kundens namn: ");
             string name = Console.ReadLine();
 
@@ -212,10 +212,10 @@ namespace GIK299_Projektuppgift_Grupp32
             Console.Write("Ange telefonnummer: ");
             string phone = Console.ReadLine();
 
-            // Skapa Costumer med konstruktorn
+            //Skapa Costumer så den passar konstruktorn
             var costumer = new Costumers(name, registration, phone);
 
-            // Skapa Booking med konstruktorn och lägg till listan
+            // Skapa Booking så den passar konstruktorn och lägg till listan
             var booking = new Booking(planedTime, service, costumer);
             Start.BookedList.Add(booking);
 
