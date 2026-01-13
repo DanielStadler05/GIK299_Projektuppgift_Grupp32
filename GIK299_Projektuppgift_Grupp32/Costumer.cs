@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GIK299_Projektuppgift_Grupp32
 {
-    internal struct Costumers
+    public struct Costumers
     {
         string Name;
         string Registration;
