@@ -286,11 +286,46 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void RemoveBooking()
         {
+            Console.WriteLine("Vilken kunds bokning ska tas bort?");
+            string namn = Console.ReadLine();
 
+            bool found = false;
+
+            for (int i = 0; i < Start.BookedList.Count; i++)
+            {
+                if (Start.BookedList[i].Costumer.Name == namn)
+                {
+                    Start.BookedList.RemoveAt(i);
+                    Console.WriteLine("Bokning togs bort!");
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                Console.WriteLine("Ingen bokning med detta namn hittades.");
+            }
         }
+        
+
 
         internal static void AllBookings()
         {
+            if (Start.BookedList.Count == 0)
+            {
+                Console.WriteLine("Inga bokningar finns just nu.");
+                return;
+            }
+
+            Console.WriteLine("--- Alla bokningar ---");
+            foreach (Booking booking in Start.BookedList)
+            {
+                Console.WriteLine(
+                    $"Tid: {booking.PlanedTime:yyyy/MM/dd HH:mm}, " +
+                    $"Tjänst: {booking.Service}, " +
+                    $"Kund: {booking.Costumer}");
+            }
 
         }
     }
