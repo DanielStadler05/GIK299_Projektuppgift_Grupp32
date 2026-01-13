@@ -7,7 +7,8 @@ namespace GIK299_Projektuppgift_Grupp32
 {
     internal class Start
     {
-        internal static void start()
+        internal static List<Booking> Booking = new List<Booking>();
+        internal static void Main()
         {
             //Logga in på adminpanelen
             while (true)
@@ -21,6 +22,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 {
                     while (true)
                     {
+                        Console.Clear();
                         //Startar menyn
                         Menu.StartMenu();
                     }
