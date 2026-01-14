@@ -15,7 +15,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 Console.WriteLine("2. Lägg till en ny bokning");
                 Console.WriteLine("3. Sök lediga bokningar");
                 Console.WriteLine("4. Ta bort bokning via namn");
-                Console.WriteLine("5. Visa alla bokningar");
+                Console.WriteLine("5. Visa sorterad lista av alla bokningar");
                 Console.WriteLine("0. Avsluta Programmet");
                 Console.Write("Skriv numret: ");
 
