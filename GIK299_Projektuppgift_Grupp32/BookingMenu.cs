@@ -180,7 +180,7 @@ namespace GIK299_Projektuppgift_Grupp32
                 Console.WriteLine($"{booking}");
             }
 
-            Console.WriteLine("Vilken kunds bokning ska tas bort? (För och efternamn måste matcha)");
+            Console.WriteLine("Vilken kunds bokning ska tas bort? (Registreringsskylt, Storbokstav måste matcha)");
             string namn = Console.ReadLine();
 
             bool found = false;
@@ -188,7 +188,7 @@ namespace GIK299_Projektuppgift_Grupp32
             //Loopar igenom bokningarna och tar bort den som matchar namnet
             for (int i = 0; i < Data.BookedList.Count; i++)
             {
-                if (Data.BookedList[i].Costumer.Name == namn)
+                if (Data.BookedList[i].Costumer.Registration == namn)
                 {
                     Data.BookedList.RemoveAt(i);
                     Console.WriteLine("Bokning togs bort!");
