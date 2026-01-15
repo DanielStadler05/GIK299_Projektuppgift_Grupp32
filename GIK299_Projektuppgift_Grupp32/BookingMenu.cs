@@ -8,7 +8,7 @@ namespace GIK299_Projektuppgift_Grupp32
     {
         internal static void TodaysBookings()
         {
-
+            Console.Clear();
             var today = DateTime.Now.Date;
             bool found = false;
 
@@ -33,6 +33,7 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void AddBooking()
         {
+            Console.Clear();
             Console.WriteLine("Lägg till en ny bokning");
 
             //Visa datum och tid
@@ -96,14 +97,14 @@ namespace GIK299_Projektuppgift_Grupp32
         internal static void SearchBookings()
         {
             {
-                Console.WriteLine("Sök tider");
+                Console.Clear();
                 DateTime startDate;
                 DateTime endDate;
 
                 // Startdatum
                 while (true)
                 {
-                    Console.Clear();
+                    Console.WriteLine("Sök tider");
                     Console.Write("Ange startdatum för sökning (ÅÅÅÅ-MM-DD): ");
                     if (DateTime.TryParse(Console.ReadLine(), out startDate))
                     {
@@ -126,7 +127,7 @@ namespace GIK299_Projektuppgift_Grupp32
                     Console.Clear();
                     Console.WriteLine("Fel format. Ange datum i formatet ÅÅÅÅ-MM-DD");
                 }
-
+                //Om startdatum är efter slutdatum visa felmeddelande
                 if (startDate > endDate)
                 {
                     Console.Clear();
@@ -168,47 +169,69 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void RemoveBooking()
         {
-            if (Data.BookedList.Count == 0)
+            Console.Clear();
+            while (true)
             {
-                Console.WriteLine("Inga bokningar finns just nu.");
-                return;
-            }
-            //Visa alla bokningar
-            Console.WriteLine("Alla bokningar: ");
-            foreach (Booking booking in Data.BookedList)
-            {
-                Console.WriteLine($"{booking}");
-            }
-
-            Console.WriteLine("Vilken kunds bokning ska tas bort? (Registreringsskylt, Storbokstav måste matcha)");
-            string namn = Console.ReadLine();
-
-            bool found = false;
-
-            //Loopar igenom bokningarna och tar bort den som matchar namnet
-            for (int i = 0; i < Data.BookedList.Count; i++)
-            {
-                if (Data.BookedList[i].Costumer.Registration == namn)
+                if (Data.BookedList.Count == 0)
                 {
-                    Data.BookedList.RemoveAt(i);
-                    Console.WriteLine("Bokning togs bort!");
-                    found = true;
+                    Console.WriteLine("Inga bokningar finns just nu.");
+                    return;
+                }
+                //Visa alla bokningar
+                Console.WriteLine("Alla bokningar: ");
+                foreach (Booking booking in Data.BookedList)
+                {
+                    Console.WriteLine($"{booking}");
+                }
+
+                Console.WriteLine("Vilken kunds bokning ska tas bort? (Registreringsskylt, Storbokstav måste matcha)");
+                string namn = Console.ReadLine();
+
+                bool found = false;
+
+                //Loopar igenom bokningarna och tar bort den som matchar namnet
+                for (int i = 0; i < Data.BookedList.Count; i++)
+                {
+                    if (Data.BookedList[i].Costumer.Registration == namn)
+                    {
+                        Data.BookedList.RemoveAt(i);
+                        Console.WriteLine("Bokning togs bort!");
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine("Ingen bokning med detta namn hittades.");
+                }
+                Console.WriteLine("1. Ta bort en till bokning?");
+                Console.WriteLine("2. Återgå till menyn");
+
+                string choice = Console.ReadLine();
+                if (choice != "1")
+                {
+                    Console.Clear();
                     break;
                 }
-            }
-
-            if (!found)
-            {
-                Console.WriteLine("Ingen bokning med detta namn hittades.");
-            }
-
-            Console.WriteLine("Tryck på enter för att återgå till menyn...");
-            Console.ReadLine();
-            Console.Clear();
+                if (choice == "1")
+                {
+                    Console.Clear();
+                }
+                if (choice == "2")
+                {
+                    Console.WriteLine("Tryck på enter för att återgå till menyn...");
+                    Console.ReadLine();
+                    Console.Clear();
+                    return;
+                }
+                
+            }            
         }
 
         internal static void AllBookings()
         {
+            Console.Clear();
             if (Data.BookedList.Count == 0)
             {
                 Console.WriteLine("Inga bokningar finns just nu.");
