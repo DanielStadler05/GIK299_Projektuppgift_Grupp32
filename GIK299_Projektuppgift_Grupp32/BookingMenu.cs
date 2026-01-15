@@ -184,7 +184,7 @@ namespace GIK299_Projektuppgift_Grupp32
                     Console.WriteLine($"{booking}");
                 }
 
-                Console.WriteLine("Vilken kunds bokning ska tas bort? (Registreringsskylt, Storbokstav måste matcha)");
+                Console.WriteLine("Vilken kunds bokning ska tas bort? (Registreringsskylt, Storbokstav måste matcha, ej ta bort någon tryck enter)");
                 string namn = Console.ReadLine();
 
                 bool found = false;
