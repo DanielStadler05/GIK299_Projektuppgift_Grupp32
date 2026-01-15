@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GIK299_Projektuppgift_Grupp32
 {
@@ -33,19 +34,47 @@ namespace GIK299_Projektuppgift_Grupp32
 
         internal static void AddBooking()
         {
-            Console.Clear();
-            Console.WriteLine("Lägg till en ny bokning");
+            Console.Clear();            
 
             //Visa datum och tid
             DateTime planedTime;
             while (true)
             {
+                Console.WriteLine("Lägg till en ny bokning");
                 Console.Write("Ange datum och tid (ÅÅÅÅ-MM-DD HH:mm): ");
-                if (DateTime.TryParse(Console.ReadLine(), out planedTime))
+                var dateInput = Console.ReadLine();
+
+
+                if (!DateTime.TryParse(dateInput, out planedTime))
+                {
+                    Console.Clear();
+                    Console.WriteLine("Fel format, försök igen!");
+                    continue;
+                }
+
+                //Om användaren ger en tid som inte är på timmen, justera till närmsta timme
+                if (planedTime.Minute != 0 || planedTime.Second != 0)
+                {
+                    planedTime = new DateTime(planedTime.Year, planedTime.Month, planedTime.Day, planedTime.Hour, 0, 0);
+                    Console.WriteLine($"OBS: Tiden har justerats från {dateInput} till {planedTime.Hour}:00");
+                }
+
+                //Testa om tiden redan finns i listan
+                bool finns = false;
+                for (int i = 0; i < Data.BookedList.Count; i++)
+                {
+                    if (Data.BookedList[i].PlanedTime == planedTime)
+                    {
+                        Console.WriteLine($"En bokning på {planedTime:yyyy-MM-dd HH:mm} finns redan! Försök igen.");
+                        finns = true;
+                        break;
+                    }
+                }
+
+                if (finns == false)
                 {
                     break;
                 }
-                Console.WriteLine("Fel format, försök igen!");
             }
 
             //Loopa igenom och visa tjänsterna
