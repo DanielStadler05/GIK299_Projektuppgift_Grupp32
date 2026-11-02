@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Projektuppgift_GIK2JK_Grupp11 (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Projektuppgift_GIK2JK_Grupp11/bin/Debug/net10.0/Projektuppgift_GIK2JK_Grupp11.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Projektuppgift_GIK2JK_Grupp11",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        }
+    ]
+}

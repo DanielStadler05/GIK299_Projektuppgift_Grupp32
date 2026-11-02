@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace GIK299_Projektuppgift_Grupp32
+namespace Projektuppgift_GIK2JK_Grupp11
 {
     internal class BookingMenu
     {

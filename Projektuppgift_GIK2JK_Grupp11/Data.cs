@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GIK299_Projektuppgift_Grupp32
+namespace Projektuppgift_GIK2JK_Grupp11
 {
     internal class Data
     {

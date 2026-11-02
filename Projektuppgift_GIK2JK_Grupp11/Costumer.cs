@@ -1,4 +1,4 @@
-﻿namespace GIK299_Projektuppgift_Grupp32
+﻿namespace Projektuppgift_GIK2JK_Grupp11
 {
     public struct Costumers
     {
